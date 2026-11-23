@@ -643,3 +643,10 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
 .sad.wide .op-sun{right:auto;left:50%}
 @media (max-width:700px){.sad.wide{grid-template-columns:1fr;padding:30px 18px 18px!important}.sad.wide b{font-size:19px!important}.sad.wide em{grid-column:1;grid-row:auto;justify-self:start}}
 .hw-from{margin:4px 0 0;font-size:17px}
+
+/* Puzzle English */
+.en-ad{background:linear-gradient(140deg,#0b5cff,#22c1ff)!important;color:#fff}
+.en-ad.e2{background:linear-gradient(140deg,#ff7a00,#ffb03a)!important}
+.sad .erid{display:block;margin-top:8px;font-size:9.5px;line-height:1.25;opacity:.7}
+.sad.wide .erid{grid-column:1/-1}
+.en-ad em{background:#fff!important;color:#0b3d9e!important}.en-ad.e2 em{color:#a34700!important}

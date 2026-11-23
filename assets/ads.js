@@ -5,11 +5,11 @@
   var tpl = document.getElementById('adpool'); if (!tpl) return;
   var pool = [].slice.call(tpl.content.children);
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
-  var by = { calc: [], wa: [], vr: [], op: [] };
+  var by = { calc: [], wa: [], vr: [], op: [], en: [] };
   shuffle(pool).forEach(function (n) { by[n.dataset.b].push(n); });
   function take(b) { return by[b].length ? by[b].shift() : null; }
   var g = [].slice.call(document.querySelectorAll('.rail .ad-g'));
-  var plan = [['calc', 'vr', 'op'], ['wa', 'vr', 'op'], ['wa', 'vr', 'wa']];
+  var plan = [['calc', 'en', 'op'], ['wa', 'vr', 'en'], ['wa', 'vr', 'op']];
   g.forEach(function (box, k) { (plan[k] || []).forEach(function (b) { var n = take(b); if (n) box.appendChild(n.cloneNode(true)); }); });
   // широкая полоса: один вариант из оставшихся
   [].forEach.call(document.querySelectorAll('.ad-wide[data-auto]'), function (w) {
