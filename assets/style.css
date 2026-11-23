@@ -1,0 +1,124 @@
+/* Путёвкин — ночное небо, солнце, лагуна. Dela Gothic One + Onest. Посадочный талон как поиск, табло вылетов как каталог. */
+:root{--ink:#0F2340;--ink2:#4A5B78;--sky:#EAF2FF;--paper:#fff;--sun:#FFC93C;--sea:#00C2B8;--blue:#2F6BFF;--mint:#C9F5E4;--line:#D5E2F7;--r:22px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#EAF2FF;--ink2:#A8B8D4;--sky:#0B1A31;--paper:#13274A;--line:#24406B;--mint:#123E3A}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--sky);color:var(--ink);font:400 18px/1.6 "Onest",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Dela Gothic One",system-ui,sans-serif;font-weight:400;line-height:1.05;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(40px,8vw,96px)}h2{font-size:clamp(28px,4.4vw,46px);margin-bottom:8px}h3{font-size:20px}
+a{color:var(--blue)}:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.small{font-size:14px;color:var(--ink2)}
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--sky) 85%,transparent);backdrop-filter:blur(12px)}
+.top .wrap{display:flex;align-items:center;height:66px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font:22px "Dela Gothic One"}
+.logo i{width:30px;height:30px;border-radius:9px;background:radial-gradient(circle at 50% 42%,var(--sun) 0 34%,transparent 35%),linear-gradient(transparent 62%,var(--sea) 62% 76%,transparent 76%),#0F2340}
+.nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+.nav a{color:var(--ink2);text-decoration:none;font-weight:500;padding:8px 14px;border-radius:999px}
+.nav a:hover,.nav a[aria-current]{color:var(--ink);background:var(--paper)}
+.nav a.go{background:var(--ink);color:var(--sky)}
+.burger{display:none;margin-left:auto;border:0;background:var(--paper);color:var(--ink);border-radius:999px;padding:10px 16px;font:600 15px Onest}
+@media (max-width:820px){.nav{display:none;position:absolute;top:64px;left:12px;right:12px;flex-direction:column;align-items:stretch;background:var(--paper);padding:10px;border-radius:var(--r);box-shadow:0 20px 50px rgba(15,35,64,.2)}.nav.open{display:flex}.burger{display:block}}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;padding:15px 24px;background:var(--blue);color:#fff;text-decoration:none;font:700 17px Onest;cursor:pointer;transition:transform .12s}
+.btn:active{transform:scale(.97)}.btn.sun{background:var(--sun);color:#0F2340}
+
+/* герой */
+.hero{padding:36px 0 30px}.hero .sub{font-size:21px;color:var(--ink2);max-width:36em;margin:16px 0 26px}
+.hero.small{padding:26px 0 20px}.hero.small h1{font-size:clamp(34px,6vw,64px);margin-top:10px}
+.crumbs{font-size:15px;color:var(--ink2)}.crumbs a{color:var(--ink2)}
+.facts{display:flex;gap:10px;flex-wrap:wrap;margin:-8px 0 22px}.facts span{background:var(--paper);border-radius:999px;padding:8px 16px;font-weight:600;font-size:16px}
+
+/* посадочный талон */
+.pass{display:grid;grid-template-columns:1fr 250px;background:var(--paper);border-radius:var(--r);box-shadow:0 24px 60px rgba(15,35,64,.13);position:relative}
+.pass-main{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:18px}
+.pass label{display:flex;flex-direction:column;padding:8px 12px;border-radius:14px}
+.pass label:hover{background:var(--sky)}
+.pass label span{font-size:13px;color:var(--ink2);font-weight:600}
+.pass select,.pass input{border:0;background:none;font:700 19px Onest;color:var(--ink);padding:4px 0;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer}
+.pass-stub{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:18px 22px;border-left:3px dashed var(--line);position:relative;text-align:center}
+.pass-stub:before,.pass-stub:after{content:"";position:absolute;left:-14px;width:26px;height:26px;border-radius:50%;background:var(--sky)}
+.pass-stub:before{top:-13px}.pass-stub:after{bottom:-13px}
+.pass-stub .btn{padding:18px}.pass-stub small{color:var(--ink2);font-size:14px}
+@media (max-width:980px){.pass{grid-template-columns:1fr}.pass-main{grid-template-columns:1fr 1fr}.pass-stub{border-left:0;border-top:3px dashed var(--line)}
+ .pass-stub:before,.pass-stub:after{top:-14px;left:auto}.pass-stub:before{left:-13px}.pass-stub:after{right:-13px;bottom:auto}}
+@media (max-width:480px){.pass-main{grid-template-columns:1fr}}
+
+.sec{padding:40px 0}.lead{color:var(--ink2);margin:0 0 20px}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.dc{display:flex;flex-direction:column;gap:2px;padding:20px;border-radius:var(--r);text-decoration:none;color:#0F2340;min-height:170px}
+.dc .flag{font-size:40px;line-height:1;margin-bottom:auto}.dc b{font:24px "Dela Gothic One";margin-top:16px}.dc span{font-size:15px;opacity:.85}
+.dc:hover b{text-decoration:underline}
+.sun{background:var(--sun)}.sea{background:var(--sea)}.sky{background:#9FC0FF}.mint{background:#9EEBCB}
+.hero.sun,.hero.sea,.hero.sky,.hero.mint{background:none}
+
+/* табло */
+.board{background:#0F2340;color:#F3F7FF;border-radius:var(--r);padding:10px;font-variant-numeric:tabular-nums;overflow-x:auto}
+.board .row{display:grid;grid-template-columns:1.2fr .9fr 1.4fr 1.6fr;gap:14px;padding:13px 14px;border-radius:12px;text-decoration:none;color:inherit;min-width:720px}
+.board .row:not(.head):hover{background:#1C3561}
+.board .row+.row{border-top:1px solid #1E3558}
+.board .head{color:#8FA7CF;font-size:14px;font-weight:600}
+.board .c1{font-weight:700}.board .c3{color:var(--sun)}.board .c4{color:#9FE8DD;font-size:16px}
+
+.guides{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.guide{background:var(--paper);border-radius:var(--r);padding:22px;text-decoration:none;color:var(--ink)}
+.guide span{font-size:32px}.guide b{display:block;font:20px/1.15 "Dela Gothic One";margin:10px 0 8px}.guide p{margin:0;color:var(--ink2);font-size:16px}
+
+.art{max-width:760px}.art h2{font-size:clamp(24px,3.4vw,32px);margin:36px 0 12px}.art li{margin:.5em 0}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.mo{text-align:center;padding:10px 0;border-radius:10px;background:var(--paper);color:var(--ink2);font-size:14px;font-weight:600}
+.mo.on{background:var(--sun);color:#0F2340}
+@media (max-width:600px){.months{grid-template-columns:repeat(6,1fr)}}
+.cta{margin:36px 0;background:#0F2340;color:#fff;border-radius:var(--r);padding:24px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.cta b{font:22px "Dela Gothic One"}
+.calendar{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.month{background:var(--paper);border-radius:var(--r);padding:20px}.month h3{margin-bottom:10px}
+.month div{display:flex;flex-wrap:wrap;gap:6px}.month a,.month span{background:var(--sky);border-radius:999px;padding:6px 12px;text-decoration:none;color:var(--ink);font-size:15px}
+
+footer{margin-top:60px;background:#0F2340;color:#C5D3EA;padding:40px 0 50px;font-size:15px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+footer .logo{color:#fff}footer b{color:#fff;display:block;margin-bottom:8px}
+footer a{color:#C5D3EA;display:block;text-decoration:none;margin:5px 0}footer a:hover{color:#fff}footer .small{color:#8FA7CF}
+@media (max-width:720px){footer .cols{grid-template-columns:1fr}}
+
+/* ── фото-герой: медленный наезд + самолётик по пунктиру (одна анимация при загрузке) ── */
+.photo-hero{position:relative;min-height:min(78vh,680px);display:flex;align-items:flex-end;overflow:hidden;color:#fff;margin-top:-66px;padding:120px 0 120px}
+.photo-hero.country{min-height:min(64vh,560px)}
+.ph-img{position:absolute;inset:0;background-size:cover;background-position:center;animation:kb 18s ease-out both}
+.photo-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,35,64,.45) 0,rgba(15,35,64,0) 35%,rgba(15,35,64,.78) 100%)}
+@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1)}}
+.ph-text{position:relative;z-index:2;width:100%}
+.photo-hero h1{font-size:clamp(46px,9vw,120px);text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.photo-hero.country h1{font-size:clamp(36px,6.5vw,76px)}
+.photo-hero .sub{color:#fff;opacity:.95;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+.photo-hero .crumbs,.photo-hero .crumbs a{color:#fff}
+.photo-hero .facts{margin:0}.photo-hero .facts span{background:rgba(255,255,255,.92);color:#0F2340}
+.flight{position:absolute;top:8%;left:0;width:100%;height:42%;z-index:1;opacity:.85}
+.flight path{stroke-dashoffset:1400;animation:draw 3.4s .3s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.plane{position:absolute;z-index:2;top:0;left:0;font-size:34px;color:#fff;offset-path:path("M-40 250 C 300 60, 800 60, 1240 200");offset-rotate:auto;animation:fly 3.8s .3s cubic-bezier(.45,0,.25,1) both;text-shadow:0 4px 14px rgba(0,0,0,.3)}
+@keyframes fly{0%{offset-distance:0%;opacity:1}90%{opacity:1}100%{offset-distance:100%;opacity:0}}
+@media (max-width:820px){.flight,.plane{display:none}}
+@media (prefers-reduced-motion:reduce){.ph-img,.flight path{animation:none}.flight path{stroke-dashoffset:0}.plane{display:none}}
+body:has(.photo-hero) .top{background:transparent;backdrop-filter:none}
+body:has(.photo-hero) .top .logo,body:has(.photo-hero) .top .nav a:not(.go){color:#fff}
+body:has(.photo-hero) .top .nav a:hover{background:rgba(255,255,255,.18)}
+body:has(.photo-hero) .top .nav a.go{background:var(--sun);color:#0F2340}
+@media (max-width:820px){body:has(.photo-hero) .top .nav a:not(.go){color:var(--ink)}}
+.top{z-index:30}
+.pass-wrap{position:relative;z-index:5;margin-top:-84px}
+
+/* карточки с фото */
+.dc{position:relative;overflow:hidden;padding:0;min-height:260px;color:#fff;justify-content:flex-end}
+.dc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dc:hover img{transform:scale(1.06)}
+.dc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(15,35,64,.88))}
+.dc-t{position:relative;z-index:1;padding:18px;display:flex;flex-direction:column}
+.dc .flag{font-size:26px;margin:0}.dc b{margin-top:4px}
+
+/* сравнение площадок */
+.compare{background:var(--paper);border-radius:var(--r);padding:28px;margin-top:10px}
+.cmp-head p{color:var(--ink2);max-width:44em}
+.cmp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 12px}
+.cmp{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:18px;background:var(--sky);text-decoration:none;color:var(--ink);border:2px solid transparent;transition:border-color .15s}
+.cmp:hover{border-color:var(--blue)}
+.cmp b{font:22px "Dela Gothic One"}.cmp span{color:var(--ink2);font-size:16px}
+.cmp i{font-style:normal;font-weight:700;color:var(--blue);margin-top:10px}
+@media (max-width:760px){.cmp-row{grid-template-columns:1fr}}
