@@ -1,8 +1,36 @@
-// Ротация: в каждом .rot оставляем один случайный вариант.
-[].forEach.call(document.querySelectorAll('.rot'), function (r) {
-  var n = r.children.length; if (n < 2) return; var keep = Math.floor(Math.random() * n);
-  for (var j = n - 1; j >= 0; j--) if (j !== keep) r.removeChild(r.children[j]);
-});
+// Реклама: 9 штук в 3 группах. На широком экране справа, группа меняется по мере прокрутки;
+// на телефоне — 4 штуки вставляются между блоками страницы (а не в самом низу).
+(function () {
+  var rail = document.querySelector('.rail'); if (!rail) return;
+  var groups = [].slice.call(rail.querySelectorAll('.ad-g'));
+  if (matchMedia('(min-width:1180px)').matches) {
+    var cur = 0;
+    function upd() {
+      var max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? scrollY / max : 0;
+      var g = Math.min(groups.length - 1, Math.floor(p * groups.length * .999));
+      if (g !== cur) { cur = g; groups.forEach(function (x, k) { x.classList.toggle('on', k === g); }); }
+    }
+    addEventListener('scroll', upd, { passive: true }); upd();
+    return;
+  }
+  var main = document.querySelector('main'); if (!main) return;
+  var ads = [].slice.call(rail.querySelectorAll('[data-m]')).sort(function (a, b) { return a.dataset.m - b.dataset.m; });
+  var kids = [].slice.call(main.children).filter(function (x) { return x.matches('section.story, section.sec:not(.ai-sec), section.sunband'); });
+  if (kids.length >= 3) {
+    ads.forEach(function (a, k) { var box = document.createElement('div'); box.className = 'ad-in'; box.appendChild(a);
+      var at = kids[Math.min(kids.length - 1, k)]; if (at.classList.contains('sunband') && at.nextElementSibling) at = at.nextElementSibling;
+      at.parentNode.insertBefore(box, at.nextSibling); });
+    rail.remove(); return;
+  }
+  var hs = [].slice.call(main.querySelectorAll('h2')).filter(function (h) { return !h.closest('.story,.sunband,.pass,.picker,.ai-sec,.hero,.photo-hero,.band,.ad-in'); });
+  var n = hs.length;
+  ads.forEach(function (a, k) {
+    var box = document.createElement('div'); box.className = 'ad-in'; box.appendChild(a);
+    var h = n ? hs[Math.min(n - 1, Math.floor((k + 1) * n / (ads.length + 1)))] : null;
+    if (h && !h.previousElementSibling?.classList?.contains('ad-in')) h.parentNode.insertBefore(box, h); else main.appendChild(box);
+  });
+  rail.remove();
+})();
 // Калькулятор дохода Workadult в рекламе: формула как на workadult.pro (часы × 5 дней × 4.3 нед × $9 × опыт).
 (function () {
   [].forEach.call(document.querySelectorAll('.wa-calc'), function (c) {

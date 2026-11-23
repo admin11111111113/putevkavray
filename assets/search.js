@@ -58,6 +58,7 @@ function putSearch(f) {
     var f = document.getElementById('poisk'); if (!f) return;
     f.to.value = b.dataset.pick; f.scrollIntoView({ behavior: 'smooth', block: 'center' });
     f.classList.remove('flash'); void f.offsetWidth; f.classList.add('flash');
+    if (b.classList.contains('st-go')) putSearch(f);
   });
 })();
 
