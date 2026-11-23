@@ -25,13 +25,20 @@
   var rail = document.querySelector('.rail'); if (!rail) return;
   var groups = [].slice.call(rail.querySelectorAll('.ad-g'));
   if (matchMedia('(min-width:1180px)').matches) {
-    var cur = 0;
-    function upd() {
-      var max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? scrollY / max : 0;
-      var g = Math.min(groups.length - 1, Math.floor(p * groups.length * .999));
-      if (g !== cur) { cur = g; groups.forEach(function (x, k) { x.classList.toggle('on', k === g); }); }
+    // колонка справа на всю длину страницы: все объявления подряд, листаются вместе с сайтом
+    var inn = rail.querySelector('.rail-in'), cards = [].slice.call(rail.querySelectorAll('.ad-g > *'));
+    cards.forEach(function (c) { inn.appendChild(c); }); groups.forEach(function (g) { g.remove(); });
+    rail.classList.add('col');
+    var home = rail.classList.contains('home-rail'), mainEl = document.querySelector('main'), foot = document.querySelector('footer');
+    function place() {
+      var top, h;
+      if (home) { var pw = document.querySelector('.pass-wrap'); top = pw ? Math.round(pw.getBoundingClientRect().top + scrollY) : 120; h = foot.offsetTop - top - 50; rail.style.top = top + 'px'; }
+      else { h = mainEl.offsetHeight - 40; }
+      h = Math.max(500, h); inn.style.height = h + 'px';
+      var n = Math.max(2, Math.min(cards.length, Math.floor(h / 480)));
+      cards.forEach(function (c, k) { c.style.display = k < n ? '' : 'none'; });
     }
-    addEventListener('scroll', upd, { passive: true }); upd();
+    place(); addEventListener('load', place); addEventListener('resize', place); setTimeout(place, 3000);
     return;
   }
   var main = document.querySelector('main'); if (!main) return;

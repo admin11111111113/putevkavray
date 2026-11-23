@@ -652,3 +652,10 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
 .en-ad em{background:#fff!important;color:#0b3d9e!important}.en-ad.e2 em{color:#a34700!important}
 
 .en-ad.sr{background:linear-gradient(140deg,#5a2d82,#c06cf0)!important}.en-ad.sr em{color:#4a1f6e!important}
+
+/* ═══ реклама: колонка справа на всю длину, листается с сайтом ═══ */
+@media (min-width:1180px){
+ .rail.col:not(.home-rail){position:relative!important;top:auto!important;padding-top:30px}
+ .rail.col .rail-in{display:flex!important;flex-direction:column;justify-content:space-around;gap:30px}
+ .rail.col.home-rail{position:absolute!important;right:20px;width:290px;padding:0}
+}
