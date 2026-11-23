@@ -1,3 +1,8 @@
+// Ротация: в каждом .rot оставляем один случайный вариант.
+[].forEach.call(document.querySelectorAll('.rot'), function (r) {
+  var n = r.children.length; if (n < 2) return; var keep = Math.floor(Math.random() * n);
+  for (var j = n - 1; j >= 0; j--) if (j !== keep) r.removeChild(r.children[j]);
+});
 // Калькулятор дохода Workadult в рекламе: формула как на workadult.pro (часы × 5 дней × 4.3 нед × $9 × опыт).
 (function () {
   [].forEach.call(document.querySelectorAll('.wa-calc'), function (c) {

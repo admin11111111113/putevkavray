@@ -554,3 +554,10 @@ body.scrolled .top{background:rgba(15,35,64,.9)!important;backdrop-filter:blur(1
  .rail .op-ad{padding:30px 0 14px!important}.rail .op-ad .t{font-size:12.5px}
 }
 @media (min-width:1180px){.rail .sad.sm,.rail .op-ad{padding-top:38px!important}.rail .wa-calc{padding-top:38px}}
+
+/* ═══ v13: ротация вариантов рекламы ═══ */
+.rot{display:contents}.rot>*+*{display:none}
+.vr-ad.v2{background:linear-gradient(150deg,#0E7C86,#2F6BFF)}
+.vr-ad.v3{background:linear-gradient(150deg,#FF7A59,#C2338A)}
+.wa-ad.wa2{background:linear-gradient(160deg,#1d1036,#6b1d5c)}
+.op-sun{width:90px!important;height:90px!important;right:-28px!important;top:-38px!important;opacity:.7!important}.op-ad b{position:relative;z-index:1;padding-right:30px}
