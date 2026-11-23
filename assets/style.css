@@ -621,3 +621,13 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
  .sad,.wa-calc,.st-card,.pass{box-shadow:0 8px 20px rgba(15,35,64,.15)!important}
  .op-sun,.side-vr .sv-img i{animation:none!important}
 }
+/* живые туры (виджет Level.Travel) */
+.hw{min-height:540px;margin:14px 0 26px;background:#fff;border-radius:22px;padding:6px;box-shadow:0 10px 30px rgba(15,35,64,.08)}
+.hw[data-state=ok]{min-height:0}.hw[hidden]{display:none}
+.hw-load{padding:30px 20px;color:#8193B2;font-size:15px;background:linear-gradient(90deg,#f3f6fb 25%,#e8eef8 50%,#f3f6fb 75%);background-size:200% 100%;animation:hwl 1.4s linear infinite;border-radius:18px;min-height:500px}
+@keyframes hwl{to{background-position:-200% 0}}
+.hw-list{max-width:1220px;margin:0 auto;padding:0 20px}
+.layout:not(.full) .hw-list{padding:0}
+.hw-empty{background:#FFF4D1;border-radius:16px;padding:16px 20px}
+.hot-live h2{margin-top:30px}
+@media (max-width:600px){.hw{min-height:460px;padding:2px;border-radius:16px}.hw-load{min-height:440px}}

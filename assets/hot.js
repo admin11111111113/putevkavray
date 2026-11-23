@@ -1,37 +1,41 @@
-// «Горящие»: ссылки на живые подборки горящих туров Level.Travel из выбранного города + погода сейчас.
+// Горящие туры: официальный блок Level.Travel (Travelpayouts) — реальные туры с датами и ценами
+// из выбранного города вылета. Блоки грузятся, когда доходишь до них; где туров нет — блок прячется.
 (function () {
-  var list = document.getElementById('hot'); if (!list) return;
-  var HC = window.HOT_CITIES || {}, C = window.CITIES || {};
-  var cityName = 'Москва';
-  function d2(n) { return (n < 10 ? '0' : '') + n; }
-  function fmt(d) { return d2(d.getDate()) + '.' + d2(d.getMonth() + 1) + '.' + d.getFullYear(); }
-  var MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-  var a = new Date(Date.now() + 2 * 864e5), b = new Date(Date.now() + 12 * 864e5);
-  var win = document.querySelector('.hot-win'); if (win) win.textContent = 'вылет ' + a.getDate() + ' ' + MON[a.getMonth()] + ' – ' + b.getDate() + ' ' + MON[b.getMonth()];
-  function wrapAff(url) { var P = window.PUT || {}; return P.marker && P.p ? 'https://tp.media/r?marker=' + P.marker + '&trs=605578&p=' + P.p + '&u=' + encodeURIComponent(url) : url; }
-  function links() {
-    var c = C[cityName] || C['Москва'], slug = HC[cityName];
-    [].forEach.call(list.querySelectorAll('.tkt'), function (el) {
-      var cc = el.dataset.cc, ex = el.dataset.ex, url;
-      if (slug && ex) url = 'https://level.travel/explore/' + slug + '-Russia/' + ex + '/hot';
-      else url = 'https://level.travel/search/' + c[0] + '-to-Any-' + cc + '-departure-' + fmt(new Date(Date.now() + 3 * 864e5)) + '-for-7-nights-2-adults-0-kids-1..5-stars';
-      el.querySelector('.tkt-go').href = wrapAff(url);
-      el.querySelector('.tkt-from').textContent = cityName;
-    });
-    [].forEach.call(document.querySelectorAll('.hot-city'), function (s) { s.textContent = cityName; });
+  var slots = [].slice.call(document.querySelectorAll('.hw')); if (!slots.length) return;
+  var C = window.CITIES || {};
+  var W = 'https://tpembd.com/content?currency=rub&trs=605578&shmarker=810540&locale=ru&powered_by=false&min_lines=5&responsive=true&erid=2Vtzqx6JctP&promo_id=4098&campaign_id=26';
+  function city() {
+    var v; try { v = localStorage.getItem('put_city'); } catch (e) {}
+    var i = document.querySelector('.st-from input, input[name="from"]'); if (i && C[i.value]) v = i.value;
+    return C[v] ? v : 'Москва';
   }
-  document.addEventListener('put:city', function (e) { cityName = e.detail; links(); });
-  links();
-  var els = [].slice.call(list.querySelectorAll('.tkt'));
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=' + els.map(function (e) { return e.dataset.lat; }).join(',') + '&longitude=' + els.map(function (e) { return e.dataset.lon; }).join(',') + '&current=temperature_2m,weather_code&daily=temperature_2m_max&forecast_days=1&timezone=auto')
-    .then(function (r) { return r.json(); }).then(function (arr) {
-      if (!Array.isArray(arr)) arr = [arr];
-      arr.forEach(function (w, i) {
-        if (!w || !w.current) return; var t = Math.round(w.current.temperature_2m), mx = w.daily ? Math.round(w.daily.temperature_2m_max[0]) : t;
-        var el = els[i].querySelector('.tkt-wx'); el.textContent = (mx >= 24 ? '🌴 ' : mx <= 5 ? '❄️ ' : '⛅ ') + 'днём ' + (mx > 0 ? '+' : '') + mx + '°';
-        els[i].dataset.t = mx;
-      });
-      // самые тёплые — наверх
-      els.sort(function (x, y) { return (+y.dataset.t || -99) - (+x.dataset.t || -99); }).forEach(function (e) { list.appendChild(e); });
-    }).catch(function () {});
+  var cur = city(), gen = 0;
+  function fill(s) {
+    var c = C[cur] || C['Москва'], my = gen;
+    s.hidden = false; s.dataset.state = 'load';
+    s.innerHTML = '<div class="hw-load">Ищем туры из ' + cur + ' — ' + s.dataset.name + '…</div>';
+    var sc = document.createElement('script'); sc.async = true; sc.charset = 'utf-8';
+    sc.src = W + '&origin_iata=' + c[1] + '&destination_iata=' + s.dataset.cc; s.appendChild(sc);
+    var n = 0, t = setInterval(function () {
+      if (my !== gen) return clearInterval(t);
+      var host = s.querySelector('tp-cascoon'), txt = host && host.shadowRoot ? host.shadowRoot.textContent : '';
+      if (/проверенного оператора/.test(txt) || ++n > 50) { clearInterval(t); s.dataset.state = 'none'; s.hidden = true; done(); }
+      else if (/Показать тур/.test(txt)) { clearInterval(t); s.dataset.state = 'ok'; var l = s.querySelector('.hw-load'); if (l) l.remove(); done(); }
+    }, 400);
+  }
+  function done() {
+    var empty = document.querySelector('.hw-empty'); if (!empty) return;
+    var all = slots.every(function (s) { return s.dataset.state === 'none'; });
+    empty.hidden = !all; empty.querySelectorAll('.hot-city').forEach(function (e) { e.textContent = cur; });
+  }
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting && !e.target.dataset.state) { io.unobserve(e.target); fill(e.target); } });
+  }, { rootMargin: '600px 0px' }) : null;
+  function start() {
+    gen++; cur = city();
+    [].forEach.call(document.querySelectorAll('.hot-city'), function (e) { e.textContent = cur; });
+    slots.forEach(function (s) { delete s.dataset.state; s.innerHTML = ''; s.hidden = false; if (io) io.observe(s); else fill(s); });
+  }
+  document.addEventListener('put:city', function () { setTimeout(start, 50); });
+  start();
 })();
