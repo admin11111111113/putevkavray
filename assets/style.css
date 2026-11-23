@@ -518,3 +518,39 @@ body.scrolled .top{background:rgba(15,35,64,.9)!important;backdrop-filter:blur(1
 .st-wx[hidden]{display:none!important}
 @media (min-width:901px){.st-steps{min-height:600px;align-self:center}.st-step{top:0;transform:none}}
 .st-head{margin-bottom:10px}
+
+/* ═══ v12: три рекламы справа ═══ */
+.rail-in{gap:12px!important}
+.sad.sm .sad-art{display:none}
+.sad.sm{padding-top:34px}
+.wa-calc{position:relative;display:flex;flex-direction:column;gap:8px;padding:34px 18px 18px;border-radius:26px;color:#fff;background:radial-gradient(circle at 85% 0%,#a855f7 0,transparent 55%),linear-gradient(150deg,#2a1240,#4b1650 60%,#7a1e55);box-shadow:0 18px 40px rgba(60,10,60,.3);overflow:hidden}
+.wa-calc .ad{position:absolute;top:12px;left:14px;font-size:11px;background:rgba(0,0,0,.35);padding:3px 8px;border-radius:999px}
+.wa-calc>b{font:19px/1.15 "Dela Gothic One"}
+.wa-calc label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:#e9d7f5}
+.wa-calc output{position:absolute;right:18px;font-weight:700;color:#fff}
+.wa-calc label{position:relative}
+.wc-r{width:100%;accent-color:#ff4d8d}
+.wc-exp{display:flex;gap:4px}
+.wc-exp button{flex:1;border:0;border-radius:999px;padding:6px 4px;font:600 12px Onest;color:#f3e6ff;background:rgba(255,255,255,.12);cursor:pointer}
+.wc-exp button.on{background:#ff4d8d;color:#fff}
+.wc-res{background:linear-gradient(120deg,#ff2d55,#a855f7);border-radius:14px;padding:10px 12px;text-align:center}
+.wc-res small{display:block;font-size:11px;color:#ffe0ec}
+.wc-res strong{display:block;font:30px/1.1 "Dela Gothic One";letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.wc-bar{display:block;height:6px;border-radius:99px;background:rgba(255,255,255,.25);margin-top:6px;overflow:hidden}
+.wc-bar i{display:block;height:100%;width:40%;background:#fff;border-radius:99px;transition:width .3s}
+.wa-calc .t{font-size:12.5px;line-height:1.4;opacity:.85}
+.wc-go{align-self:flex-start;background:#fff;color:#4b1650;font-weight:700;border-radius:999px;padding:9px 18px;text-decoration:none}
+.op-ad{background:linear-gradient(160deg,#16233A,#3a2d5a 60%,#E8915A);padding-top:34px!important}
+.op-ad em{color:#16233A!important;background:#F5CDA9!important}
+.op-sun{position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#F5CDA9,#E8915A 55%,transparent 70%);opacity:.8;animation:opsun 6s ease-in-out infinite}
+@keyframes opsun{50%{transform:scale(1.12)}}
+@media (min-width:1180px){.rail .sad.sm b{font-size:17px}.rail .op-ad b{font-size:17px}.rail .sad .t{font-size:13px}}
+.layout.full + .ads-strip .wa-calc{grid-row:span 2}
+.wc-bar span{display:block;height:100%;width:40%;background:#fff;border-radius:99px;transition:width .3s}
+@media (min-width:1180px){
+ .rail .sad.sm{padding:30px 0 14px}.rail .sad.sm .t{display:none}
+ .rail .wa-calc{padding:30px 16px 14px;gap:6px}.rail .wa-calc>b{font-size:16px}.rail .wa-calc .t{display:none}
+ .rail .wc-res strong{font-size:26px}.rail .wc-go{padding:8px 16px;font-size:14px}
+ .rail .op-ad{padding:30px 0 14px!important}.rail .op-ad .t{font-size:12.5px}
+}
+@media (min-width:1180px){.rail .sad.sm,.rail .op-ad{padding-top:38px!important}.rail .wa-calc{padding-top:38px}}
