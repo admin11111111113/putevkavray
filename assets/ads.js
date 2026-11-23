@@ -1,5 +1,26 @@
 // Реклама: 9 штук в 3 группах. На широком экране справа, группа меняется по мере прокрутки;
 // на телефоне — 4 штуки вставляются между блоками страницы (а не в самом низу).
+// Пул: в каждом месте случайный вариант, без повторов на странице.
+(function () {
+  var tpl = document.getElementById('adpool'); if (!tpl) return;
+  var pool = [].slice.call(tpl.content.children);
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+  var by = { calc: [], wa: [], vr: [], op: [] };
+  shuffle(pool).forEach(function (n) { by[n.dataset.b].push(n); });
+  function take(b) { return by[b].length ? by[b].shift() : null; }
+  var g = [].slice.call(document.querySelectorAll('.rail .ad-g'));
+  var plan = [['calc', 'vr', 'op'], ['wa', 'vr', 'op'], ['wa', 'vr', 'wa']];
+  g.forEach(function (box, k) { (plan[k] || []).forEach(function (b) { var n = take(b); if (n) box.appendChild(n.cloneNode(true)); }); });
+  // широкая полоса: один вариант из оставшихся
+  [].forEach.call(document.querySelectorAll('.ad-wide[data-auto]'), function (w) {
+    var m = document.querySelector('main'), pw = m && m.querySelector('.pass-wrap');
+    if (pw) pw.parentNode.insertBefore(w, pw.nextSibling); else if (m) m.insertBefore(w, m.firstChild);
+  });
+  [].forEach.call(document.querySelectorAll('.ad-wide'), function (w, k) {
+    var n = take(k % 2 ? 'op' : 'vr') || take('wa'); if (!n) return;
+    n = n.cloneNode(true); n.classList.add('wide'); w.appendChild(n);
+  });
+})();
 (function () {
   var rail = document.querySelector('.rail'); if (!rail) return;
   var groups = [].slice.call(rail.querySelectorAll('.ad-g'));
@@ -14,7 +35,7 @@
     return;
   }
   var main = document.querySelector('main'); if (!main) return;
-  var ads = [].slice.call(rail.querySelectorAll('[data-m]')).sort(function (a, b) { return a.dataset.m - b.dataset.m; });
+  var ads = [].slice.call(rail.querySelectorAll('.ad-g .sad')).slice(0, 5);
   var kids = [].slice.call(main.children).filter(function (x) { return x.matches('section.story, section.sec:not(.ai-sec), section.sunband'); });
   if (kids.length >= 3) {
     ads.forEach(function (a, k) { var box = document.createElement('div'); box.className = 'ad-in'; box.appendChild(a);
