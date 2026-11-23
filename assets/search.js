@@ -60,3 +60,41 @@ function putSearch(f) {
     f.classList.remove('flash'); void f.offsetWidth; f.classList.add('flash');
   });
 })();
+
+// Выпадающий список городов (как на турсайтах): клик — открылись все города, ввод — фильтр, стрелки/Enter.
+(function () {
+  var POP = ['Москва', 'Санкт-Петербург', 'Казань', 'Екатеринбург', 'Новосибирск', 'Краснодар', 'Самара', 'Уфа', 'Нижний Новгород', 'Ростов-на-Дону', 'Иркутск', 'Красноярск'];
+  function init() {
+    var C = window.CITIES || {}, all = POP.filter(function (c) { return C[c]; }).concat(Object.keys(C).filter(function (c) { return POP.indexOf(c) < 0; }).sort());
+    [].forEach.call(document.querySelectorAll('input[list="cities"]'), function (inp) {
+      inp.removeAttribute('list'); inp.removeAttribute('onfocus'); inp.setAttribute('autocomplete', 'off'); inp.setAttribute('role', 'combobox');
+      var host = inp.parentNode; host.classList.add('cbx');
+      var box = document.createElement('div'); box.className = 'cbx-list'; box.hidden = true; host.appendChild(box);
+      var act = -1, typed = false;
+      function render() {
+        var q = typed ? inp.value.trim().toLowerCase() : '';
+        var list = all.filter(function (c) { return !q || c.toLowerCase().indexOf(q) === 0; }).concat(q ? all.filter(function (c) { var l = c.toLowerCase(); return l.indexOf(q) > 0; }) : []);
+        box.innerHTML = list.length ? '' : '<div class="cbx-none">Нет такого города вылета</div>';
+        if (!q) { var h = document.createElement('div'); h.className = 'cbx-h'; h.textContent = 'Популярные'; box.appendChild(h); }
+        list.forEach(function (c, i) {
+          if (!q && i === POP.length) { var h2 = document.createElement('div'); h2.className = 'cbx-h'; h2.textContent = 'Все города'; box.appendChild(h2); }
+          var o = document.createElement('button'); o.type = 'button'; o.className = 'cbx-o' + (i === act ? ' on' : '') + (C[c] && c === inp.dataset.cur ? ' cur' : '');
+          o.textContent = c; o.addEventListener('mousedown', function (e) { e.preventDefault(); pick(c); }); box.appendChild(o);
+        });
+        box.hidden = false;
+      }
+      function pick(c) { inp.value = c; inp.dataset.cur = c; box.hidden = true; typed = false; act = -1; inp.blur(); if (window.putSetCity) putSetCity(c, true); }
+      inp.addEventListener('focus', function () { typed = false; act = -1; inp.dataset.cur = inp.value; setTimeout(function () { inp.select(); }, 0); render(); });
+      inp.addEventListener('click', function () { if (box.hidden) render(); });
+      inp.addEventListener('input', function () { typed = true; act = 0; render(); });
+      inp.addEventListener('keydown', function (e) {
+        var os = box.querySelectorAll('.cbx-o');
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); act = Math.max(0, Math.min(os.length - 1, act + (e.key === 'ArrowDown' ? 1 : -1))); [].forEach.call(os, function (o, i) { o.classList.toggle('on', i === act); }); if (os[act]) os[act].scrollIntoView({ block: 'nearest' }); }
+        else if (e.key === 'Enter') { e.preventDefault(); if (os[act < 0 ? 0 : act]) pick(os[act < 0 ? 0 : act].textContent); }
+        else if (e.key === 'Escape') { box.hidden = true; inp.value = inp.dataset.cur || 'Москва'; inp.blur(); }
+      });
+      inp.addEventListener('blur', function () { setTimeout(function () { box.hidden = true; if (!C[inp.value]) inp.value = inp.dataset.cur || 'Москва'; }, 150); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
