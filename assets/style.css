@@ -614,3 +614,10 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
  footer .cols>div:nth-child(3){display:none}
  .ad-in{margin:22px 16px}
 }
+/* телефоны: без дорогих размытий и тяжёлых теней — меньше тормозов при прокрутке */
+@media (max-width:820px){
+ *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ body.scrolled .top,.top{background:#0F2340!important}
+ .sad,.wa-calc,.st-card,.pass{box-shadow:0 8px 20px rgba(15,35,64,.15)!important}
+ .op-sun,.side-vr .sv-img i{animation:none!important}
+}
