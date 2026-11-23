@@ -52,5 +52,35 @@
   "page": "https://commons.wikimedia.org/wiki/File:Beach_of_Makadi_Bay_panorama.jpg",
   "author": "kallerna",
   "license": "CC BY-SA 3.0"
+ },
+ "hajnan": {
+  "title": "File:Hainan - 2007 - Resort Golden Palm - Yalong Bay - panoramio - Maxim Nedashkovskiy.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Hainan_-_2007_-_Resort_Golden_Palm_-_Yalong_Bay_-_panoramio_-_Maxim_Nedashkovskiy.jpg",
+  "author": "Maxim Nedashkovskiy",
+  "license": "CC BY-SA 3.0"
+ },
+ "bali": {
+  "title": "File:Nusa Dua Bali.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nusa_Dua_Bali.jpg",
+  "author": "GdML",
+  "license": "CC BY-SA 4.0"
+ },
+ "goa": {
+  "title": "File:Sunloungers at Palolem beach.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Sunloungers_at_Palolem_beach.jpg",
+  "author": "Ravi Dwivedi",
+  "license": "CC BY-SA 4.0"
+ },
+ "tunis": {
+  "title": "File:Hammamet-Sud beach R02.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Hammamet-Sud_beach_R02.jpg",
+  "author": "Marc Ryckaert (MJJR)",
+  "license": "CC BY 3.0"
+ },
+ "zanzibar": {
+  "title": "File:White sandy beach at Nungwi, Zanzibar.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:White_sandy_beach_at_Nungwi,_Zanzibar.jpg",
+  "author": "ObonyoML",
+  "license": "CC BY-SA 4.0"
  }
 }
