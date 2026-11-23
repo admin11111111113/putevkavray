@@ -122,3 +122,28 @@ body:has(.photo-hero) .top .nav a.go{background:var(--sun);color:#0F2340}
 .cmp b{font:22px "Dela Gothic One"}.cmp span{color:var(--ink2);font-size:16px}
 .cmp i{font-style:normal;font-weight:700;color:var(--blue);margin-top:10px}
 @media (max-width:760px){.cmp-row{grid-template-columns:1fr}}
+
+/* ── бот-подборщик ── */
+.picker{background:#0F2340;color:#fff;border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px}
+.pk-head{display:flex;gap:14px;align-items:center}
+.pk-av{width:48px;height:48px;border-radius:50%;background:var(--sun);color:#0F2340;display:grid;place-items:center;font-size:22px;flex:none}
+.pk-head b{font:22px "Dela Gothic One";display:block}.pk-head small{color:#B9C9E6;font-size:15px}
+.pk-log{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow-y:auto}
+.pk-log:empty{display:none}
+.picker.big .pk-log{max-height:none;min-height:200px}
+.pk-m{max-width:85%;padding:12px 16px;border-radius:18px;font-size:17px;line-height:1.45}
+.pk-m.u{align-self:flex-end;background:var(--blue);border-bottom-right-radius:6px}
+.pk-m.a{align-self:flex-start;background:#1C3561;border-bottom-left-radius:6px}
+.pk-typing{color:#B9C9E6;font-size:15px}
+.pk-card{background:#fff;color:#0F2340;border-radius:16px;padding:16px 18px}
+.pk-card b{font:19px "Dela Gothic One";display:block}.pk-card p{margin:6px 0 12px;color:#4A5B78;font-size:16px}
+.pk-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.pk-links .btn{padding:11px 18px;font-size:16px}
+.pk-alt{color:var(--blue);font-weight:600;font-size:15px}
+.pk-chips{display:flex;gap:8px;flex-wrap:wrap}
+.pk-chips button{background:#1C3561;color:#fff;border:0;border-radius:999px;padding:9px 15px;font:500 15px Onest;cursor:pointer}
+.pk-chips button:hover{background:var(--sun);color:#0F2340}
+.pk-compose{display:flex;gap:10px}
+.pk-compose textarea{flex:1;resize:none;border:0;border-radius:14px;padding:14px 16px;font:17px/1.4 Onest;color:#0F2340}
+.pk-compose textarea:focus{outline:3px solid var(--sun)}
+@media (max-width:560px){.pk-compose{flex-direction:column}}
+.fab{position:fixed;right:16px;bottom:16px;z-index:40;background:var(--sun);color:#0F2340;font-weight:700;text-decoration:none;border-radius:999px;padding:14px 20px;box-shadow:0 12px 30px rgba(15,35,64,.3)}

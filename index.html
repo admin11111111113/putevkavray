@@ -13,7 +13,7 @@
 <header class="top"><div class="wrap">
 <a class="logo" href="/"><i></i>Путёвка в рай</a>
 <button class="burger" aria-expanded="false" onclick="var n=document.querySelector('.nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">Меню</button>
-<nav class="nav"><a href="/napravleniya/">Направления</a><a href="/goryashchie-tury/">Горящие</a><a href="/kuda-poehat/">Куда поехать</a><a href="/sovety/">Советы</a><a class="go" href="/#poisk">Найти тур</a></nav>
+<nav class="nav"><a href="/podbor/">Подбор тура</a><a href="/napravleniya/">Направления</a><a href="/goryashchie-tury/">Горящие</a><a href="/kuda-poehat/">Куда поехать</a><a href="/sovety/">Советы</a><a class="go" href="/#poisk">Найти тур</a></nav>
 </div></header>
 <main><section class="photo-hero"><div class="ph-img" style="background-image:url(/assets/img/hero.jpg)"></div>
 <svg class="flight" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><path d="M-40 250 C 300 60, 800 60, 1240 200" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="2 12" stroke-linecap="round"/></svg>
@@ -30,6 +30,12 @@
 </div>
 <div class="pass-stub"><button class="btn sun" type="submit">Найти туры</button><small>Сравним цены туроператоров</small></div>
 </form></div>
+<section class="sec"><div class="wrap"><div class="picker" data-picker>
+<div class="pk-head"><span class="pk-av">✈</span><div><b>Подберу тур за минуту</b><small>Напиши как другу: куда, когда, сколько вас и бюджет</small></div></div>
+<div class="pk-log" aria-live="polite"></div>
+<div class="pk-chips"><button>На море в январе вдвоём, бюджет 120 тысяч</button><button>С ребёнком подешевле на неделю</button><button>Медовый месяц, хочется красиво</button><button>Экзотика в марте из Казани</button></div>
+<div class="pk-compose"><textarea rows="1" placeholder="Например: тепло в феврале, 2 взрослых, до 150 тысяч" aria-label="Что ищешь"></textarea><button class="btn pk-send">Подобрать</button></div>
+</div></div></section>
 <section class="sec"><div class="wrap"><h2>Тепло в ноябре</h2><p class="lead">Где сейчас сезон: море тёплое, погода стабильная.</p>
 <div class="dgrid"><a class="dc" href="/egipet/"><img src="/assets/img/egipet.jpg" alt="Египет" loading="lazy"><span class="dc-t"><span class="flag">🇪🇬</span><b>Египет</b><span>≈ 5 ч, виза по прилёту (марка), на Синае — свои правила</span></span></a><a class="dc" href="/oae/"><img src="/assets/img/oae.jpg" alt="ОАЭ" loading="lazy"><span class="dc-t"><span class="flag">🇦🇪</span><b>ОАЭ</b><span>≈ 5 ч, без визы до 90 дней</span></span></a><a class="dc" href="/tailand/"><img src="/assets/img/tailand.jpg" alt="Таиланд" loading="lazy"><span class="dc-t"><span class="flag">🇹🇭</span><b>Таиланд</b><span>≈ 9 ч, без визы, срок пребывания проверь перед поездкой</span></span></a><a class="dc" href="/maldivy/"><img src="/assets/img/maldivy.jpg" alt="Мальдивы" loading="lazy"><span class="dc-t"><span class="flag">🇲🇻</span><b>Мальдивы</b><span>≈ 9 ч, бесплатно по прилёту до 30 дней</span></span></a><a class="dc" href="/kuba/"><img src="/assets/img/kuba.jpg" alt="Куба" loading="lazy"><span class="dc-t"><span class="flag">🇨🇺</span><b>Куба</b><span>≈ 13 ч, без визы до 90 дней</span></span></a></div></div></section>
 <section class="sec"><div class="wrap"><div class="compare"><div class="cmp-head"><h2>Сравни цену на трёх площадках</h2>
@@ -48,5 +54,6 @@
 <div><b>Советы</b><a href="/goryashchie-tury/">Горящие туры</a><a href="/kak-vybrat-otel/">Как выбрать отель и не пожалеть</a><a href="/strahovka/">Страховка в путешествие</a><a href="/s-detmi/">Отдых с детьми</a><a href="/o-sajte/">О сайте</a><a href="/foto/">Авторы фото</a></div>
 </div><p class="small" style="margin-top:24px">© 2026 Путёвка в рай. Визовые правила и сроки меняются — проверяй перед поездкой на сайте консульства или МИД.</p></div></footer>
 <script>window.PUT={marker:"605578",p:""};</script>
-<script src="/assets/search.js" defer></script>
+<script src="/assets/search.js" defer></script><script src="/assets/picker.js" defer></script>
+<a class="fab" href="/podbor/">✈ Подобрать тур</a>
 </body></html>
