@@ -447,3 +447,55 @@ body.scrolled .top .logo,body.scrolled .top .nav a:not(.go){color:#fff}
 .hot-more{margin:26px 0 0;color:var(--ink2)}
 /* табло видно всегда */
 .board .row.rv{transform:none;opacity:1}
+/* v9: рекламная колонка — оба баннера в экран */
+@media (min-width:1180px){
+ .rail{top:110px;padding-top:34px}
+ .rail-in{gap:14px}
+ .rail .sad{gap:6px;padding-bottom:16px}
+ .rail .sad-art{height:96px}
+ .rail .vr-art{padding-top:10px}.rail .vr-art i{width:40px;height:76px;border-radius:10px}.rail .vr-art i:nth-child(2){height:86px}
+ .rail .sad b{font-size:18px}.rail .sad .t{font-size:13.5px;line-height:1.4}
+ .rail .sad em{padding:8px 16px;font-size:14px}
+ body:has(.rail) .fab{display:none}
+}
+.vr-art i{position:relative;overflow:hidden}
+.vr-art i::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:18px;font-style:normal;opacity:.9}
+.vr-art i:nth-child(1){background:linear-gradient(160deg,#00C2B8,#2F6BFF)}.vr-art i:nth-child(3){background:linear-gradient(160deg,#FFC93C,#FF8A3D)}
+
+/* ═══ v10: шапка в стиле крупных турсайтов ═══ */
+.top,body:has(.photo-hero) .top,body.scrolled .top{position:fixed;left:0;right:0;top:0;pointer-events:auto;background:#fff!important;backdrop-filter:none!important;box-shadow:0 1px 0 #E6ECF5}
+body.scrolled .top{box-shadow:0 8px 30px rgba(15,35,64,.10)!important}
+.top .wrap,body.scrolled .top .wrap{margin:0 auto;max-width:1240px;height:76px;padding:0 20px;border-radius:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;display:flex;align-items:center}
+.top .logo,body.scrolled .top .logo,body:has(.photo-hero) .top .logo{color:#0F2340!important;gap:10px;font:24px/1 "Dela Gothic One";letter-spacing:-.01em}
+.logo span{display:flex;align-items:baseline;gap:8px}
+.logo b{font-weight:400;color:#FF7A1A}
+.top .logo i{width:38px;height:38px;border-radius:12px;background:radial-gradient(circle at 50% 44%,#FFC93C 0 30%,transparent 31%),linear-gradient(transparent 64%,#00C2B8 64% 78%,transparent 78%),linear-gradient(160deg,#FF8A3D,#FF5C7A)}
+.top .nav{gap:2px}
+.top .nav a:not(.go),body.scrolled .top .nav a:not(.go),body:has(.photo-hero) .top .nav a:not(.go){display:flex;flex-direction:column;align-items:center;gap:3px;color:#0F2340!important;font-size:13px;font-weight:600;padding:8px 12px;border-radius:14px;background:none;box-shadow:none}
+.top .nav a i{font-style:normal;font-size:21px;line-height:1;transition:transform .2s}
+.top .nav a:not(.go):hover{background:#FFF3E6!important}.top .nav a:hover i{transform:translateY(-2px) scale(1.1)}
+.top .nav a[aria-current]{background:#FFF3E6!important;color:#FF7A1A!important;box-shadow:none}
+.top .nav a.go,body:has(.photo-hero) .top .nav a.go{margin-left:12px;padding:14px 26px;border-radius:14px;font-size:16px;font-weight:700;background:#FF7A1A;color:#fff;box-shadow:0 8px 20px rgba(255,122,26,.35)}
+.top .nav a.go:hover{background:#FF6A00}
+.burger{background:#FFF3E6;color:#FF7A1A}
+@media (max-width:900px){.top .wrap{height:64px}.top .logo{font-size:19px}.nav{top:64px!important;left:10px;right:10px;background:#fff!important;flex-direction:row!important;flex-wrap:wrap;justify-content:center}.top .nav a.go{margin:6px 0 0;width:100%;text-align:center}}
+.photo-hero{padding-top:76px}
+.hero.small.band{padding-top:130px}
+/* флаги */
+.flag{display:inline-block;width:22px;height:16px;object-fit:cover;border-radius:3px;vertical-align:-2px;box-shadow:0 0 0 1px rgba(15,35,64,.12)}
+h1 .flag{width:44px;height:32px;border-radius:6px;vertical-align:4px}
+.tkt-main h3 .flag,.st-card h3 .flag{width:30px;height:22px;vertical-align:1px}
+/* туроператоры */
+.ops{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;margin-top:26px;color:#4A5B78}
+.ops span{font-size:14px}.ops b{font:600 17px Onest;color:#0F2340;opacity:.72}
+/* реклама справа на главной (широкий экран) */
+@media (min-width:1760px){
+ .layout.full + .ads-strip{position:fixed;right:22px;top:110px;width:290px;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;z-index:20;transition:opacity .3s}
+ body:not(.scrolled) .layout.full + .ads-strip{opacity:0;pointer-events:none}
+ .layout.full + .ads-strip .sad-art{height:96px}
+ .layout.full + .ads-strip .vr-art i{width:40px;height:76px}
+ .layout.full + .ads-strip .sad b{font-size:18px}.layout.full + .ads-strip .sad .t{font-size:13.5px}
+ body:has(.ads-strip) .fab{right:330px}
+}
+.pass-stub .btn.sun,#poisk .btn.sun{background:#FF7A1A;color:#fff;box-shadow:0 8px 20px rgba(255,122,26,.35)}
+.tkt-go{background:#FF7A1A!important;color:#fff!important}
