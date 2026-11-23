@@ -26,7 +26,7 @@ function putSearch(f) {
   var url = 'https://level.travel/search/' + city[0] + '-to-Any-' + f.to.value + '-departure-' + date +
     '-for-' + f.nights.value + '-nights-' + f.adults.value + '-adults-0-kids-1..5-stars';
   var P = window.PUT || {};
-  if (P.marker && P.p) url = 'https://tp.media/r?marker=' + P.marker + '&p=' + P.p + '&u=' + encodeURIComponent(url);
+  if (P.marker && P.p) url = 'https://tp.media/r?marker=' + P.marker + '&trs=605578&p=' + P.p + '&u=' + encodeURIComponent(url);
   window.open(url, '_blank', 'noopener');
   return false;
 }

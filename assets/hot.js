@@ -8,7 +8,7 @@
   var MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
   var a = new Date(Date.now() + 2 * 864e5), b = new Date(Date.now() + 12 * 864e5);
   var win = document.querySelector('.hot-win'); if (win) win.textContent = 'вылет ' + a.getDate() + ' ' + MON[a.getMonth()] + ' – ' + b.getDate() + ' ' + MON[b.getMonth()];
-  function wrapAff(url) { var P = window.PUT || {}; return P.marker && P.p ? 'https://tp.media/r?marker=' + P.marker + '&p=' + P.p + '&u=' + encodeURIComponent(url) : url; }
+  function wrapAff(url) { var P = window.PUT || {}; return P.marker && P.p ? 'https://tp.media/r?marker=' + P.marker + '&trs=605578&p=' + P.p + '&u=' + encodeURIComponent(url) : url; }
   function links() {
     var c = C[cityName] || C['Москва'], slug = HC[cityName];
     [].forEach.call(list.querySelectorAll('.tkt'), function (el) {
