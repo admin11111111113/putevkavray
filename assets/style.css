@@ -650,3 +650,5 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
 .sad .erid{display:block;margin-top:8px;font-size:9.5px;line-height:1.25;opacity:.7}
 .sad.wide .erid{grid-column:1/-1}
 .en-ad em{background:#fff!important;color:#0b3d9e!important}.en-ad.e2 em{color:#a34700!important}
+
+.en-ad.sr{background:linear-gradient(140deg,#5a2d82,#c06cf0)!important}.en-ad.sr em{color:#4a1f6e!important}
