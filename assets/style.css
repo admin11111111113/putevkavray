@@ -671,3 +671,15 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
 .faq summary::after{content:"+";position:absolute;right:0;top:-2px;font-size:22px;line-height:1;color:#0F2340}
 .faq details[open] summary::after{content:"–"}
 .faq details p{margin:10px 0 0}
+
+/* страна × месяц (24.11) */
+.verdict{display:flex;flex-direction:column;gap:4px;margin:8px 0 26px;padding:18px 20px;border-radius:18px;border-left:6px solid #2BB673;background:#EAF8F0}
+.verdict b{font:20px "Dela Gothic One"}.verdict.mid{border-color:var(--sun);background:#FFF6DC}.verdict.no{border-color:#E2574C;background:#FDECEA}
+.clim{border-collapse:collapse;width:100%;max-width:520px;margin:6px 0 10px}.clim th,.clim td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}.clim th{font-weight:500;color:var(--ink2);width:45%}.clim td{font-weight:700}
+.yr{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin:8px 0 18px}
+.ym{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;border-radius:12px;background:var(--sky);color:var(--ink);text-decoration:none;font-size:13px}
+.ym i{font-style:normal;font-weight:700}.ym small{font-size:11px;color:var(--ink2)}.ym.on{background:var(--sun)}a.ym:hover{background:var(--mint)}
+.tscroll{overflow-x:auto}.mtab{border-collapse:collapse;width:100%;min-width:560px;margin:10px 0}.mtab th,.mtab td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}.mtab tr.ok td:last-child{color:#1E8A55;font-weight:600}.mtab tr.no td{color:var(--ink2)}
+.mlinks{margin-top:10px}.note-mid{margin:18px 0;padding:12px 16px;border-radius:14px;background:#FFF6DC}
+@media (max-width:700px){.yr{grid-template-columns:repeat(6,1fr)}}
+.tipbox{padding:14px 18px;border-radius:14px;background:var(--mint)}
