@@ -13,7 +13,6 @@
   g.forEach(function (box, k) { (plan[k] || []).forEach(function (b) { var n = take(b); if (n) box.appendChild(n.cloneNode(true)); }); });
   // широкая полоса: один вариант из оставшихся
   // на компьютере вся реклама — только в колонке справа, полосы посреди страницы убираем
-  if (matchMedia('(min-width:1180px)').matches) [].forEach.call(document.querySelectorAll('.ad-wide'), function (w) { w.remove(); });
   [].forEach.call(document.querySelectorAll('.ad-wide[data-auto]'), function (w) {
     var m = document.querySelector('main'), pw = m && m.querySelector('.pass-wrap');
     if (pw) pw.parentNode.insertBefore(w, pw.nextSibling); else if (m) m.insertBefore(w, m.firstChild);
@@ -26,7 +25,7 @@
 (function () {
   var rail = document.querySelector('.rail'); if (!rail) return;
   var groups = [].slice.call(rail.querySelectorAll('.ad-g'));
-  if (matchMedia('(min-width:1180px)').matches) {
+  inline(); {
     // колонка справа на всю длину страницы: все объявления подряд, листаются вместе с сайтом
     var inn = rail.querySelector('.rail-in'), cards = [].slice.call(rail.querySelectorAll('.ad-g > *'));
     cards.forEach(function (c) { inn.appendChild(c); }); groups.forEach(function (g) { g.remove(); });
@@ -43,14 +42,15 @@
     place(); addEventListener('load', place); addEventListener('resize', place); setTimeout(place, 3000);
     return;
   }
+  function inline() {
   var main = document.querySelector('main'); if (!main) return;
-  var ads = [].slice.call(rail.querySelectorAll('.ad-g .sad')).slice(0, 5);
+  var ads = [].slice.call(rail.querySelectorAll('.ad-g .sad')).slice(0, 5).map(function (a) { return a.cloneNode(true); });
   var kids = [].slice.call(main.children).filter(function (x) { return x.matches('section.story, section.sec:not(.ai-sec), section.sunband'); });
   if (kids.length >= 3) {
     ads.forEach(function (a, k) { var box = document.createElement('div'); box.className = 'ad-in'; box.appendChild(a);
       var at = kids[Math.min(kids.length - 1, k)]; if (at.classList.contains('sunband') && at.nextElementSibling) at = at.nextElementSibling;
       at.parentNode.insertBefore(box, at.nextSibling); });
-    rail.remove(); return;
+    return;
   }
   var hs = [].slice.call(main.querySelectorAll('h2')).filter(function (h) { return !h.closest('.story,.sunband,.pass,.picker,.ai-sec,.hero,.photo-hero,.band,.ad-in'); });
   var n = hs.length;
@@ -59,7 +59,7 @@
     var h = n ? hs[Math.min(n - 1, Math.floor((k + 1) * n / (ads.length + 1)))] : null;
     if (h && !h.previousElementSibling?.classList?.contains('ad-in')) h.parentNode.insertBefore(box, h); else main.appendChild(box);
   });
-  rail.remove();
+  }
 })();
 // Калькулятор дохода Workadult в рекламе: формула как на workadult.pro (часы × 5 дней × 4.3 нед × $9 × опыт).
 (function () {

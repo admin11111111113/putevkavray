@@ -683,3 +683,8 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
 .mlinks{margin-top:10px}.note-mid{margin:18px 0;padding:12px 16px;border-radius:14px;background:#FFF6DC}
 @media (max-width:700px){.yr{grid-template-columns:repeat(6,1fr)}}
 .tipbox{padding:14px 18px;border-radius:14px;background:var(--mint)}
+
+/* 24.11: реклама переключается по ширине без перезагрузки */
+@media (min-width:1180px){.ad-in,.ad-wide{display:none!important}}
+@media (max-width:1179px){.rail{display:none!important}}
+@media (min-width:1180px){.rail.col.home-rail{z-index:5}.top{z-index:50}}
