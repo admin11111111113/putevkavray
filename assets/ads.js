@@ -12,6 +12,8 @@
   var plan = [['calc', 'en', 'op'], ['wa', 'vr', 'en'], ['wa', 'vr', 'op']];
   g.forEach(function (box, k) { (plan[k] || []).forEach(function (b) { var n = take(b); if (n) box.appendChild(n.cloneNode(true)); }); });
   // широкая полоса: один вариант из оставшихся
+  // на компьютере вся реклама — только в колонке справа, полосы посреди страницы убираем
+  if (matchMedia('(min-width:1180px)').matches) [].forEach.call(document.querySelectorAll('.ad-wide'), function (w) { w.remove(); });
   [].forEach.call(document.querySelectorAll('.ad-wide[data-auto]'), function (w) {
     var m = document.querySelector('main'), pw = m && m.querySelector('.pass-wrap');
     if (pw) pw.parentNode.insertBefore(w, pw.nextSibling); else if (m) m.insertBefore(w, m.firstChild);
@@ -34,8 +36,8 @@
       var top, h;
       if (home) { var pw = document.querySelector('.pass-wrap'); top = pw ? Math.round(pw.getBoundingClientRect().top + scrollY) : 120; h = foot.offsetTop - top - 50; rail.style.top = top + 'px'; }
       else { h = mainEl.offsetHeight - 40; }
-      h = Math.max(500, h); inn.style.height = h + 'px';
-      var n = Math.max(2, Math.min(cards.length, Math.floor(h / 480)));
+      h = Math.max(1350, h); inn.style.height = h + 'px';
+      var n = Math.max(3, Math.min(cards.length, Math.floor(h / 440)));
       cards.forEach(function (c, k) { c.style.display = k < n ? '' : 'none'; });
     }
     place(); addEventListener('load', place); addEventListener('resize', place); setTimeout(place, 3000);
