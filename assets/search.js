@@ -27,6 +27,12 @@ function putSearch(f) {
     '-for-' + f.nights.value + '-nights-' + f.adults.value + '-adults-0-kids-1..5-stars';
   var P = window.PUT || {};
   if (P.marker && P.p) url = 'https://tp.media/r?marker=' + P.marker + '&trs=605578&p=' + P.p + '&u=' + encodeURIComponent(url);
+  // туры показываем у себя: страница страны со списком туров из выбранного города;
+  // на Level.Travel человек уходит только по конкретному туру (бронь и оплата)
+  var name = f.from.value.trim(); for (var k in (window.CITIES || {})) if (k.toLowerCase() === name.toLowerCase()) name = k;
+  try { localStorage.setItem('put_city', name); sessionStorage.setItem('put_exact', JSON.stringify({ cc: f.to.value, url: url })); } catch (e) {}
+  var to = (P.slug || {})[f.to.value] || P.hot;
+  if (to) { var here = location.pathname === to; location.href = to + '#tury'; if (here) location.reload(); return false; }
   window.open(url, '_blank', 'noopener');
   return false;
 }
@@ -97,4 +103,11 @@ function putSearch(f) {
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+// кнопка «Все туры на твои даты» под списком туров (если человек пришёл из поиска)
+(function () {
+  var b = document.querySelector('.hw-exact'), hw = document.querySelector('.hw'); if (!b || !hw) return; var x = null;
+  try { x = JSON.parse(sessionStorage.getItem('put_exact')); } catch (e) {}
+  if (!x || x.cc !== hw.dataset.cc) return; b.querySelector('a').href = x.url; b.hidden = false;
 })();

@@ -659,3 +659,6 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
  .rail.col .rail-in{display:flex!important;flex-direction:column;justify-content:space-around;gap:30px}
  .rail.col.home-rail{position:absolute!important;right:20px;width:290px;padding:0}
 }
+
+.hw-exact{margin:18px 0 6px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}.hw-exact small{color:#6b7a90}
+#tury{scroll-margin-top:80px}
