@@ -688,3 +688,28 @@ footer .cols{grid-template-columns:1.4fr 1.6fr 1fr}
 @media (min-width:1180px){.ad-in,.ad-wide{display:none!important}}
 @media (max-width:1179px){.rail{display:none!important}}
 @media (min-width:1180px){.rail.col.home-rail{z-index:5}.top{z-index:50}}
+
+/* === 26.11: реклама как на «Опоре» — узкие прямоугольные баннеры 200px, закреплены справа, сайт сужен === */
+@media (min-width:1180px){
+ .rail.col.fix:not(.zz),.rail.col.fix.home-rail{position:fixed!important;top:80px!important;bottom:14px!important;right:12px!important;left:auto!important;width:200px!important;padding:0!important;margin:0!important;overflow-y:auto;scrollbar-width:none;z-index:15!important;-webkit-mask-image:linear-gradient(180deg,#000 92%,transparent);mask-image:linear-gradient(180deg,#000 92%,transparent)}
+ .rail.fix::-webkit-scrollbar{display:none}
+ .rail.fix .rail-in{display:flex!important;flex-direction:column;justify-content:flex-start!important;gap:10px!important;height:auto!important;padding-bottom:30px}
+ .rail.fix .sad,.rail.fix .sad.sm,.rail.fix .op-ad{display:flex!important;padding:0 0 10px!important;gap:5px!important;border-radius:8px!important;box-shadow:0 4px 14px rgba(15,35,64,.18)!important;flex:none}
+ .rail.fix .sad:hover{transform:none}
+ .rail.fix .sad-art,.rail.fix .sad.sm .sad-art{display:block!important;height:84px!important;flex:none;margin-bottom:3px}
+ .rail.fix .sad>*:not(.sad-art):not(.ad):not(.op-sun){margin-left:10px!important;margin-right:10px!important}
+ .rail.fix .sad b,.rail.fix .op-ad b{font-size:13.5px!important;line-height:1.2!important;padding-right:0!important}
+ .rail.fix .sad .t,.rail.fix .sad.sm .t,.rail.fix .op-ad .t{display:-webkit-box!important;font-size:11.5px!important;line-height:1.38!important;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+ .rail.fix .sad em{border-radius:6px!important;padding:4px 10px!important;font-size:11.5px!important;margin-top:2px}
+ .rail.fix .sad .ad{top:5px!important;left:6px!important;border-radius:4px!important;font-size:9px!important;padding:1px 5px!important}
+ .rail.fix .erid{font-size:8px!important;margin-top:2px!important}
+ .rail.fix .op-sun{display:none}
+ .rail.fix .wa-calc{padding:26px 10px 10px!important;gap:5px!important;border-radius:8px!important;flex:none}
+ .rail.fix .wa-calc>b{font-size:13.5px!important;line-height:1.2}.rail.fix .wa-calc .t{display:none!important}
+ .rail.fix .wa-calc label{font-size:11.5px}.rail.fix .wc-exp button{font-size:10.5px;padding:3px 6px}
+ .rail.fix .wc-res strong{font-size:22px!important}.rail.fix .wc-go{padding:4px 10px!important;font-size:11.5px!important;border-radius:6px!important}
+ body.with-col>section,body.with-col>.layout,body.with-col>footer,body.with-col>.ad-wide{margin-right:225px!important}
+ body.with-col .layout:not(.full){display:block!important;max-width:none!important;padding:0!important}
+ body.with-col .layout main .wrap,body.with-col footer .wrap,body.with-col .st-stage{max-width:min(1200px,calc(100% - 40px))!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important}
+ body.with-col .fab{right:225px!important}
+}

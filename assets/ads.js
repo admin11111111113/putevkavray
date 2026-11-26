@@ -9,7 +9,7 @@
   shuffle(pool).forEach(function (n) { by[n.dataset.b].push(n); });
   function take(b) { return by[b].length ? by[b].shift() : null; }
   var g = [].slice.call(document.querySelectorAll('.rail .ad-g'));
-  var plan = [['calc', 'en', 'op'], ['wa', 'vr', 'en'], ['wa', 'vr', 'op']];
+  var plan = [['wa', 'calc', 'en'], ['vr', 'wa', 'op'], ['en', 'wa', 'vr', 'op', 'wa']];
   g.forEach(function (box, k) { (plan[k] || []).forEach(function (b) { var n = take(b); if (n) box.appendChild(n.cloneNode(true)); }); });
   // широкая полоса: один вариант из оставшихся
   // на компьютере вся реклама — только в колонке справа, полосы посреди страницы убираем
@@ -31,15 +31,18 @@
     cards.forEach(function (c) { inn.appendChild(c); }); groups.forEach(function (g) { g.remove(); });
     rail.classList.add('col');
     var home = rail.classList.contains('home-rail'), mainEl = document.querySelector('main'), foot = document.querySelector('footer');
-    function place() {
-      var top, h;
-      if (home) { var pw = document.querySelector('.pass-wrap'); top = pw ? Math.round(pw.getBoundingClientRect().top + scrollY) : 120; h = foot.offsetTop - top - 50; rail.style.top = top + 'px'; }
-      else { h = mainEl.offsetHeight - 40; }
-      h = Math.max(1350, h); inn.style.height = h + 'px';
-      var n = Math.max(3, Math.min(cards.length, Math.floor(h / 440)));
-      cards.forEach(function (c, k) { c.style.display = k < n ? '' : 'none'; });
+    // как на «Опоре»: колонка 200px закреплена справа (position:fixed), сайт сужен, объявления медленно листаются; наведение — пауза
+    rail.classList.add('fix'); document.body.classList.add('with-col'); document.body.appendChild(rail);
+    var y = 0, dir = 1, hold = 0, over = false, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    rail.addEventListener('mouseenter', function () { over = true; }); rail.addEventListener('mouseleave', function () { over = false; y = rail.scrollTop; });
+    function tick() {
+      var max = rail.scrollHeight - rail.clientHeight;
+      if (!still && !over && max > 4 && !document.hidden && getComputedStyle(rail).position === 'fixed') {
+        if (hold > 0) hold--; else { y += dir * 0.35; if (y >= max) { y = max; dir = -1; hold = 180; } else if (y <= 0) { y = 0; dir = 1; hold = 180; } rail.scrollTop = y; }
+      }
+      requestAnimationFrame(tick);
     }
-    place(); addEventListener('load', place); addEventListener('resize', place); setTimeout(place, 3000);
+    setTimeout(function () { hold = 120; requestAnimationFrame(tick); }, 1500);
     return;
   }
   function inline() {
