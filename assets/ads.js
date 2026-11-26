@@ -33,6 +33,16 @@
     var home = rail.classList.contains('home-rail'), mainEl = document.querySelector('main'), foot = document.querySelector('footer');
     // как на «Опоре»: колонка 200px закреплена справа (position:fixed), сайт сужен, объявления медленно листаются; наведение — пауза
     rail.classList.add('fix'); document.body.classList.add('with-col'); document.body.appendChild(rail);
+    // по одному месту на рекламодателя, внутри — все его объявления по очереди
+    var tpl = document.getElementById('adpool'), slots = [];
+    if (tpl) { inn.innerHTML = '';
+      ['wa', 'calc', 'en', 'vr', 'op'].forEach(function (b) {
+        var vs = [].filter.call(tpl.content.children, function (n) { return n.dataset.b === b; }).map(function (n) { return n.cloneNode(true); });
+        if (vs.length) { var s = adSlot(vs); inn.appendChild(s); slots.push(s); }
+      });
+      adRotate(slots);
+      [].forEach.call(inn.querySelectorAll('.wa-calc'), function (c) { window.waCalcInit && waCalcInit(c); });
+    }
     var y = 0, dir = 1, hold = 0, over = false, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     rail.addEventListener('mouseenter', function () { over = true; }); rail.addEventListener('mouseleave', function () { over = false; y = rail.scrollTop; });
     function tick() {
@@ -66,7 +76,8 @@
 })();
 // Калькулятор дохода Workadult в рекламе: формула как на workadult.pro (часы × 5 дней × 4.3 нед × $9 × опыт).
 (function () {
-  [].forEach.call(document.querySelectorAll('.wa-calc'), function (c) {
+  window.waCalcInit = function (c) { if (c.dataset.on) return; c.dataset.on = 1;
+  (function (c) {
     var r = c.querySelector('.wc-r'), h = c.querySelector('.wc-h'), sum = c.querySelector('.wc-sum'), bar = c.querySelector('.wc-bar span'), exp = 1, shown = 0, touched = false;
     function target() { return Math.round(+r.value * 5 * 4.3 * 9 * exp / 50) * 50; }
     function tick() {
@@ -84,5 +95,22 @@
     var dir = 1;
     setInterval(function () { if (touched || document.hidden) return; var v = +r.value + dir; if (v > 9 || v < 3) { dir = -dir; v = +r.value + dir; } r.value = v; go(); }, 1100);
     go();
-  });
+  })(c); };
+  [].forEach.call(document.querySelectorAll('.wa-calc'), waCalcInit);
 })();
+
+// 26.11: в каждом месте колонки — один рекламодатель, его объявления сменяют друг друга (другая картинка и другой смысл)
+function adRotate(slots) {
+  slots.forEach(function (s, i) {
+    var v = [].slice.call(s.children); if (!v.length) return; var k = 0, over = false;
+    v[0].classList.add('on'); if (v.length < 2) return;
+    s.addEventListener('mouseenter', function () { over = true; }); s.addEventListener('mouseleave', function () { over = false; });
+    setTimeout(function () {
+      setInterval(function () { if (over || document.hidden) return; v[k].classList.remove('on'); k = (k + 1) % v.length; v[k].classList.add('on'); }, 7000);
+    }, i * 1100);
+  });
+}
+function adSlot(cards) {
+  var s = document.createElement('div'); s.className = 'adrot';
+  cards.sort(function () { return Math.random() - .5; }).forEach(function (c) { s.appendChild(c); }); return s;
+}
